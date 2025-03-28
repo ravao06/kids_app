@@ -12,6 +12,7 @@ import DrawingPage from "./pages/DrawingPage";
 import StoriesPage from "./pages/StoriesPage";
 import NotFound from "./pages/NotFound";
 import TalkAIPage from "./pages/TalkAIPage";
+import ImageGenerator from "./pages/ImageGeneratorPage";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/drawing" element={<DrawingPage />} />
             <Route path="/stories" element={<StoriesPage />} />
             <Route path="/talk-ai" element={<TalkAIPage />} />
+            <Route path="/image-ai-generator" element={<ImageGenerator />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

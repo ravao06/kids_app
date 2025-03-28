@@ -66,6 +66,7 @@ const useChat = () => {
         setInput,
         sendMessage,
         handleKeyPress,
+        setMessages
     };
 };
 
