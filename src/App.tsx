@@ -11,8 +11,8 @@ import VoicePage from "./pages/VoicePage";
 import DrawingPage from "./pages/DrawingPage";
 import StoriesPage from "./pages/StoriesPage";
 import NotFound from "./pages/NotFound";
+import TalkAIPage from "./pages/TalkAIPage";
 
-// Create a client
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -28,6 +28,7 @@ const App = () => (
             <Route path="/voice" element={<VoicePage />} />
             <Route path="/drawing" element={<DrawingPage />} />
             <Route path="/stories" element={<StoriesPage />} />
+            <Route path="/talk-ai" element={<TalkAIPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

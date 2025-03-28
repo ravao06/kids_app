@@ -1,6 +1,4 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import ActivityCard from '@/components/ActivityCard';
 import Character from '@/components/Character';
@@ -34,26 +32,33 @@ const Index = () => {
       icon: "📚",
       color: "kid-green",
       route: "/stories"
+    },
+    {
+      title: "Talk IA",
+      description: "Discute avec une IA et apprends de nouvelles choses !",
+      icon: "💬",
+      color: "kid-orange",
+      route: "/talk-ai"
     }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
-      
+
       <main className="flex-1 p-6 flex flex-col items-center">
         <div className="w-full max-w-5xl">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold mb-2 text-gray-800">Bienvenue sur AI Kid Explorer !</h1>
             <p className="text-xl text-gray-600">Un monde d'apprentissage t'attend !</p>
           </div>
-          
+
           <div className="flex justify-center mb-12">
             <Character message="Salut ! Je suis Robo, ton compagnon d'exploration. Que veux-tu faire aujourd'hui ?" />
           </div>
-          
+
           <h2 className="text-2xl font-bold mb-6 text-gray-800">Activités</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {activities.map((activity, index) => (
               <ActivityCard
@@ -68,7 +73,7 @@ const Index = () => {
           </div>
         </div>
       </main>
-      
+
       <footer className="py-6 text-center text-gray-500 bg-white">
         <p>AI Kid Explorer - Apprends en t'amusant !</p>
       </footer>
