@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,6 +13,7 @@ interface ScanResult {
 const ObjectScanner: React.FC = () => {
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null); // Référence pour la vidéo
   const [isScanning, setIsScanning] = useState(false);
   const [results, setResults] = useState<ScanResult[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -58,6 +58,33 @@ const ObjectScanner: React.FC = () => {
       setSelectedImage(imageUrl);
       setResults([]);
       setScanMessage("");
+    }
+  };
+
+  // Start webcam stream
+  const startWebcam = async () => {
+    if (videoRef.current) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        videoRef.current.srcObject = stream;
+      } catch (error) {
+        console.error("Erreur d'accès à la caméra:", error);
+        setScanMessage("Je n'ai pas pu accéder à la caméra. Assure-toi qu'elle est connectée et autorisée.");
+      }
+    }
+  };
+
+  // Capture a frame from the video stream
+  const captureImageFromVideo = () => {
+    if (videoRef.current && canvasRef.current) {
+      const context = canvasRef.current.getContext('2d');
+      if (context) {
+        context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
+        const imageUrl = canvasRef.current.toDataURL();
+        setSelectedImage(imageUrl);
+        setResults([]);
+        setScanMessage("");
+      }
     }
   };
 
@@ -143,7 +170,7 @@ const ObjectScanner: React.FC = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-100">
             <Upload size={64} className="text-gray-400 mb-4" />
             <p className="text-gray-500 text-center px-4">
-              Importe une image pour commencer à explorer !
+              Importe une image ou active la webcam pour commencer à explorer !
             </p>
           </div>
         )}
@@ -152,6 +179,13 @@ const ObjectScanner: React.FC = () => {
           ref={canvasRef} 
           className="absolute inset-0 w-full h-full object-cover" 
           style={{ display: 'none' }}
+        />
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          playsInline
+          muted
         />
       </div>
       
@@ -170,6 +204,22 @@ const ObjectScanner: React.FC = () => {
           </div>
         </label>
         
+        <Button
+          className="bg-kid-blue hover:bg-blue-700 text-white"
+          onClick={startWebcam}
+          disabled={isModelLoading}
+        >
+          Activer la webcam
+        </Button>
+
+        <Button 
+          className="bg-kid-green hover:bg-green-700 text-white" 
+          onClick={captureImageFromVideo} 
+          disabled={isScanning || !videoRef.current}
+        >
+          Capture de l'image
+        </Button>
+
         {selectedImage && (
           <Button 
             className="bg-kid-green hover:bg-green-700 text-white" 
