@@ -4,14 +4,15 @@ import React from 'react';
 interface CharacterProps {
   message?: string;
   animate?: boolean;
+  icon?: string;
 }
 
-const Character: React.FC<CharacterProps> = ({ message, animate = true }) => {
+const Character: React.FC<CharacterProps> = ({ message, animate = true, icon = '🤖' }) => {
   return (
     <div className="flex flex-col items-center">
       <div className={`character-container ${animate ? 'animate-float' : ''}`}>
         <div className="w-32 h-32 bg-kid-blue rounded-full flex items-center justify-center overflow-hidden border-4 border-white shadow-lg">
-          <span className="text-6xl">🤖</span>
+          <span className="text-6xl">{icon}</span>
         </div>
       </div>
       

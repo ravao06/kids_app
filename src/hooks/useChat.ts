@@ -31,8 +31,10 @@ const useChat = () => {
         setIsLoading(true);
 
         try {
-            const result = await chat.sendMessage(input);
-            const response = await result.response;
+            const frenchMessage = input + " Répondez en français, s'il vous plaît.";
+
+            const result = await chat.sendMessage(frenchMessage);
+            const response =  result.response;
             const text = response.text();
             const geminiMessage: Message = { text: text, sender: 'gemini' };
             setMessages((prevMessages) => [...prevMessages, geminiMessage]);

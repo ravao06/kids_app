@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Button } from "@/components/ui/button";
 
 const Header: React.FC = () => {
   return (
@@ -14,12 +13,9 @@ const Header: React.FC = () => {
         </h1>
       </div>
       <div className="flex items-center gap-4">
-        <Button variant="ghost" className="text-kid-blue hover:text-kid-purple hover:bg-blue-50">
-          Aide
-        </Button>
-        <Button variant="ghost" className="text-kid-blue hover:text-kid-purple hover:bg-blue-50">
-          Profil
-        </Button>
+        <div className="w-12 h-12 bg-kid-blue rounded-full flex items-center justify-center overflow-hidden border-4 border-white shadow-lg">
+          <span className="text-4xl">👶</span>
+        </div>
       </div>
     </header>
   );
